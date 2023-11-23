@@ -8,6 +8,7 @@ The code runs with matlab. Ghostsript is required if the user wants to store plo
 
 ## Usage
 A test-run that uses Io as an example can be found in ['example.m'](Scripts/example.m). The test-run can be used to reproduce Figure 7 in Rovira-Navarro et al. 2023. The interior model can be changed to run other cases. 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mroviranavarro/LOV3D_open)
 
 ## Structure 
 In this repository you can find: 
