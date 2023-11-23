@@ -1,0 +1,184 @@
+%% SCRIPT USED TO TEST GET_LOVE
+%close all
+clear all
+clc
+addpath(genpath('/Users/marcrovirainavarro/Documents/MATLAB'))
+set(0,'defaulttextInterpreter','latex') 
+mfile_name          = mfilename('fullpath');
+[pathstr,name,ext]  = fileparts(mfile_name);
+cd(pathstr);
+cd('..')
+addpath(genpath(pwd))
+%% Io non-dimensional
+G=6.67e-11;
+% non-dimensional parameters for Io (see Section 2.2 and Table 1)
+mu_eff=5.2;
+r_ratio=0.53;
+rho_r=1.59;
+Ks_nd=200/60;
+% degree and order of lateral variations
+nR=1;
+mR=0;
+% peak-to-peak variations of shear modulus, viscosity and bulk modulus (in %)
+variable_mu_p=0;
+variable_eta_p=50;
+variable_K_p=0; 
+omega0=4.1086E-05; %Io's orbital frequency 
+T=2*pi/omega0; 
+Interior_Model.eta=4.942e15/(60e9*T); %non-dimensional viscosity 
+Interior_Model.MaxTime=2*pi*Interior_Model.eta;
+% uncomment if the model is elastic
+% Interior_Model.eta=NaN;
+% Interior_Model.MaxTime=NaN;
+
+Interior_Model.eta0=Interior_Model.eta;
+rho_av=rho_r*r_ratio^3+(1-r_ratio^3);
+Interior_Model.R=[r_ratio 1];
+Interior_Model.rho=[rho_r 1];
+Interior_Model.Ks=Ks_nd; 
+Interior_Model.mu=1;
+Interior_Model.R0=[r_ratio 1];
+Interior_Model.rho0=[rho_r 1];
+Interior_Model.Ks0=Ks_nd; 
+Interior_Model.mu0=1;
+Interior_Model.Gg=3/(4*pi)/mu_eff/rho_av^2;
+
+%% FORCING 
+% Forcing corresponding to a synchronous moon in an eccentric orbit (see Appendix D)
+Forcing(1).Td=2*pi/omega0;
+Forcing(1).n=2; 
+Forcing(1).m=0; 
+Forcing(1).F=3/4*sqrt(1/5); 
+Forcing(2).Td=2*pi/omega0;
+Forcing(2).n=2; 
+Forcing(2).m=-2; 
+Forcing(2).F=-7/8*sqrt(6/5);
+Forcing(3).Td=2*pi/omega0;
+Forcing(3).n=2; 
+Forcing(3).m=2; 
+Forcing(3).F=1/8*sqrt(6/5);
+%% NUMERICS
+Numerics.Nr=500; %number of radial points 
+Numerics.perturbation_order=2; %maximum order to which couplings are considered
+Numerics.solution_cutoff=12; % maximum degree of solution, not used if perturbation order is specified
+Numerics.load_couplings=1; 
+Numerics.Nenergy=12; %maximum degree to which energy dissipation is expanded 
+%% convert lateral variations to SPH
+% this part converts the variations given in real spherical harmonics and percentage into complex spherical harmonics
+l_max=30;
+Ynm_stokes.clm=zeros(2*l_max,2*l_max);
+Ynm_stokes.slm=zeros(2*l_max,2*l_max);
+Ynm_stokes.lmax=2*l_max-1;
+Ynm_stokes.clm(nR+1,mR+1)=1;
+[Ynm_zlonlat] = SPH_LatLon(Ynm_stokes);
+Ynm_z=Ynm_zlonlat.z;
+Delta=max(Ynm_z(:))-min(Ynm_z(:));
+
+if mR==0
+        % shear modulus 
+        Interior_Model.mu_variable(1,1)=nR;
+        Interior_Model.mu_variable(1,2)=mR;
+        Interior_Model.mu_variable(1,3)=variable_mu_p/100/Delta;
+        % bulk modulus
+        Interior_Model.K_variable(1,1)=nR;
+        Interior_Model.K_variable(1,2)=mR;
+        Interior_Model.K_variable(1,3)=variable_K_p/100/Delta;
+        %viscosity 
+        Interior_Model.eta_variable(1,1)=nR;
+        Interior_Model.eta_variable(1,2)=mR;
+        Interior_Model.eta_variable(1,3)=variable_eta_p/100/Delta;
+    elseif mR>0
+        % shear modulus 
+        Interior_Model.mu_variable(1,1)=nR;
+        Interior_Model.mu_variable(2,1)=nR;
+        Interior_Model.mu_variable(1,2)=mR;
+        Interior_Model.mu_variable(2,2)=-mR;    
+        Interior_Model.mu_variable(1,3)=sqrt(2)/2*variable_mu_p/100/Delta;
+        Interior_Model.mu_variable(2,3)=(-1)^mR*sqrt(2)/2*variable_mu_p/100/Delta;
+        %bulk modulus
+        Interior_Model.K_variable(1,1)=nR;
+        Interior_Model.K_variable(2,1)=nR;
+        Interior_Model.K_variable(1,2)=mR;
+        Interior_Model.K_variable(2,2)=-mR;    
+        Interior_Model.K_variable(1,3)=sqrt(2)/2*variable_K_p/100/Delta;
+        Interior_Model.K_variable(2,3)=(-1)^mR*sqrt(2)/2*variable_K_p/100/Delta;
+        % viscosity 
+        Interior_Model.eta_variable(1,1)=nR;
+        Interior_Model.eta_variable(2,1)=nR;
+        Interior_Model.eta_variable(1,2)=mR;
+        Interior_Model.eta_variable(2,2)=-mR;    
+        Interior_Model.eta_variable(1,3)=sqrt(2)/2*variable_eta_p/100/Delta;
+        Interior_Model.eta_variable(2,3)=(-1)^mR*sqrt(2)/2*variable_eta_p/100/Delta;
+    else
+        % shear modulus 
+        Interior_Model.mu_variable(1,1)=nR;
+        Interior_Model.mu_variable(2,1)=nR;
+        Interior_Model.mu_variable(1,2)=-mR;
+        Interior_Model.mu_variable(2,2)=mR;    
+        Interior_Model.mu_variable(1,3)=-1i*(-1)^mR*sqrt(2)/2*variable_mu_p/100/Delta;
+        Interior_Model.mu_variable(2,3)=1i*sqrt(2)/2*variable_mu_p/100/Delta;
+        % bulk modulus
+        Interior_Model.K_variable(1,1)=nR;
+        Interior_Model.K_variable(2,1)=nR;
+        Interior_Model.K_variable(1,2)=-mR;
+        Interior_Model.K_variable(2,2)=mR;    
+        Interior_Model.K_variable(1,3)=-1i*(-1)^mR*sqrt(2)/2*variable_K_p/100/Delta;
+        Interior_Model.K_variable(2,3)=1i*sqrt(2)/2*variable_K_p/100/Delta;
+        %viscosity
+        Interior_Model.eta_variable(1,1)=nR;
+        Interior_Model.eta_variable(2,1)=nR;
+        Interior_Model.eta_variable(1,2)=-mR;
+        Interior_Model.eta_variable(2,2)=mR;    
+        Interior_Model.eta_variable(1,3)=-1i*(-1)^mR*sqrt(2)/2*variable_eta_p/100/Delta;
+        Interior_Model.eta_variable(2,3)=1i*sqrt(2)/2*variable_eta_p/100/Delta;
+end
+% prepares a spherically-symmetric model for comparison   
+Interior_Model_Uni=Interior_Model;
+Interior_Model_Uni.eta_variable(:,3)=0; 
+Interior_Model_Uni.mu_variable(:,3)=0; 
+Interior_Model_Uni.K_variable(:,3)=0; 
+%% GET LOVE NUMBERS
+%obtains the Love number spectra
+for i=1:length(Forcing)
+    % spherically-symmetric model 
+    if i==1
+    [Love_Spectra_Uni(i),y_Uni(i),Interior_Model_UniU]=get_Love(Interior_Model_Uni,Forcing(i),Numerics,'plot_rheology_spectra',0,'verbose',1,'out_file','T1');
+    % lateral variations
+    [Love_Spectra(i),y(i),Interior_ModelU]=get_Love(Interior_Model,Forcing(i),Numerics,'plot_rheology_spectra',0,'verbose',1,'out_file','T1');
+end
+
+%% GET ENERGY SPECTRA, can be commentted if elastic
+[Energy_Spectra]=get_energy(y,Numerics,Forcing,Interior_ModelU,'verbose',1,'out_file','T1');
+[Energy_Spectra_Uni]=get_energy(y_Uni,Numerics,Forcing,Interior_Model_UniU,'verbose',1,'out_file','T1');
+Energy_Spectra_Norm=Energy_Spectra_Uni; 
+Energy_Spectra_Norm.energy_integral_v=Energy_Spectra_Norm.energy_integral_v/Energy_Spectra_Uni.energy_integral_v(1); 
+Energy_Spectra_Diff=Energy_Spectra;
+Energy_Spectra_Diff.energy_integral_v=(Energy_Spectra.energy_integral_v-Energy_Spectra_Uni.energy_integral_v)/Energy_Spectra_Uni.energy_integral_v(1);
+%% PLOT ENERGY SPECTRA, can be commented if elastic 
+% uniform, total
+plot_energy_map(Energy_Spectra_Norm,'type','total','projection','mollweide','title','Uniform Normalized')
+% variable, total
+plot_energy_map(Energy_Spectra_Norm,'type','total','projection','mollweide','title','Variable')
+% difference 
+plot_energy_map(Energy_Spectra_Diff,'type','difference','projection','cut','title','Difference','limits',[-0.4 0.4],'label','$\Delta\dot{e}/\dot{e}_0^u$');
+%% GET MAPS AND PLOT
+% (2,0)
+[y_LatLon] = get_map(y(1),Interior_ModelU);
+[y_LatLonUni] = get_map(y_Uni(1),Interior_Model_UniU);
+yDif=y_LatLon; 
+yDif.y=y_LatLon.y-y_LatLonUni.y;
+%plot_map(y_LatLonUni,Interior_Model_UniU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Uniform Model (2,0)') %floor(Numerics.Nr*0.1)
+%plot_map(yDif,Interior_ModelU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Difference (2,0)') %floor(Numerics.Nr*0.1)
+plot_map(y_LatLon,Interior_ModelU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Variable Model')
+plot_map(y_LatLon,Interior_ModelU,'field_name','test_strain_stress','radial_point',floor(Numerics.Nr*0.5),'plot_title','(2,0)');%,'save_plot',plot_name1)
+plot_map(y_LatLonUni,Interior_Model_UniU,'field_name','test_strain_stress','radial_point',floor(Numerics.Nr*0.5),'plot_title','(2,0) Uniform');
+%% (2,2)
+[y_LatLon] = get_map(y(2),Interior_ModelU);
+[y_LatLonUni] = get_map(y_Uni(2),Interior_Model_UniU);
+yDif=y_LatLon; 
+yDif.y=y_LatLon.y-y_LatLonUni.y;
+%plot_map(y_LatLonUni,Interior_Model_UniU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Uniform Model (2,0)') %floor(Numerics.Nr*0.1)
+%plot_map(yDif,Interior_ModelU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Difference (2,2)') %floor(Numerics.Nr*0.1)
+%plot_map(y_LatLon,Interior_ModelU,'field_name','all','radial_point',floor(Numerics.Nr*0.5),'plot_title','Variable Model')
+plot_map(y_LatLon,Interior_ModelU,'field_name','test_strain_stress','radial_point',floor(Numerics.Nr*0.5),'plot_title','(2,2)')
+
