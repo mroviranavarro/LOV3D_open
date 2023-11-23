@@ -25,7 +25,7 @@ The theory behind the method is detailed in Rovira-Navarro et al. 2023. A manual
 ## Author (s)
 This software have been developed by
 - ** Marc Rovira-Navarro** :  ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0000-0002-9980-5065] Method conceptualization and development 
-- ** Allard Veensrta** Development 
+- ** Allard Veenstra** Development 
 
 ## License
 The contents in the `docs/` directory are licensed under a **CC-BY 4.0** (see [CC-BY-4.0](LICENSES/CC-BY-4.0.txt) file).
