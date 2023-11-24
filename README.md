@@ -1,5 +1,5 @@
 # LOV3D
-LOV3D is Matlab package for obtaining the tidal response of bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation, Poisson equation to compute the deformation of a viscoelastic self-gravitating body. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2023.
+LOV3D is Matlab package for obtaining the tidal response of  viscoelastic self-gravitating bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation and Poisson equations and computes the tidal Love numbers. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2023.
 
 ![plot](./Plots_Out/Figure7b.png)
 
@@ -8,6 +8,7 @@ The code runs with matlab. Ghostsript is required if the user wants to store plo
 
 ## Usage
 A test-run that uses Io as an example can be found in ['example.m'](Scripts/example.m). The test-run can be used to reproduce Figure 7 in Rovira-Navarro et al. 2023. The interior model can be changed to run other cases. 
+
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mroviranavarro/LOV3D_open)
 
 ## Structure 
@@ -43,7 +44,6 @@ The code uses the following third party libraries:
 - [cmocean](https://github.com/chadagreene/cmocean): Thyng, Kristen, et al. “True Colors of Oceanography: Guidelines for Effective and Accurate Colormap Selection.” Oceanography, vol. 29, no. 3, The Oceanography Society, Sept. 2016, pp. 9–13, doi:10.5670/oceanog.2016.66.
 - [M_Map](www.eoas.ubc.ca/~rich/map.html): Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
 - [export_fig](https://github.com/altmany/export_fig/releases/tag/v3.40): Yair Altman (2023). export_fig (https://github.com/altmany/export_fig/releases/tag/v3.40), GitHub. Retrieved November 21, 2023.
-- [ColorBrewer](https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3): Stephen23 (2023). ColorBrewer: Attractive and Distinctive Colormaps, GitHub. Retrieved November 21, 2023.
 - [harmonicY](https://www.mathworks.com/matlabcentral/fileexchange/74069-wigner-3j-6j-9j): Javier Montalt Tordera (2023). Spherical Harmonics, GitHub. Retrieved November 21, 2023.
 - [Wigner 3j-6j-9j]((https://www.mathworks.com/matlabcentral/fileexchange/74069-wigner-3j-6j-9j)): Vladimir Sovkov (2023). Wigner 3j-6j-9j, MATLAB Central File Exchange. Retrieved October 4, 2023.
 
