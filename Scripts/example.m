@@ -228,6 +228,7 @@ plot_map(yDif,Interior_ModelU,'field_name','all','radial_point',floor(Numerics.N
 plot_map(y_LatLon,Interior_ModelU(end),'field_name','test_strain_stress','radial_point',floor(Numerics.Nr*0.5),'plot_title','(2,2)');
 plot_map(y_LatLonUni,Interior_Model_UniU(end),'field_name','test_strain_stress','radial_point',floor(Numerics.Nr*0.5),'plot_title','(2,2) Uniform');
 %% TEST ENERGY DISSIPATION 
+% compute energy dissipation using Eq. (34) and  (38)
 E_k_Uni=0;
 E_k=0;
 for i=1:length(Forcing)
@@ -244,11 +245,25 @@ for i=1:length(Forcing)
         end
     end
 end
-% uniform 
+% 
 e_01_Uni=2*pi*10/(Interior_Model_UniU(1).Gg)*E_k_Uni;
 e_02_Uni=4*pi*Energy_Spectra_Uni.energy_integral(1);
-disp((e_01_Uni-e_02_Uni)/e_01_Uni*100)
+disp([ 'Difference between energy computation with method 1 and 2 for the uniform model ' num2str((e_01_Uni-e_02_Uni)/e_01_Uni*100) ' \%'])
 %variable
 e_01=2*pi*10/(Interior_ModelU(1).Gg)*E_k;
 e_02=4*pi*Energy_Spectra.energy_integral(1);
-disp((e_01-e_02)/e_01*100)
+disp([ 'Difference between energy computation with method 1 and 2 for a model with lateral variations ' num2str((e_01-e_02)/e_01*100) ' \%'])
+%% TRANSFORM DIMENSIONAL UNITS
+% an example showing how to transform to dimensional units for Io
+G=6.67e-11;
+ecc=4e-3; %Io eccentricity 
+rho_0=3244; %density of uppermost layer
+R_0=1821.3e3; %surface radius 
+mu_0=60e9; %shear modulus 
+scale=omega0^2*R_0^2*ecc*rho_0/mu_0; %scale for the tidal potential 
+%uniform 
+E_total_Uni=R_0*scale^2*mu_0/T*Energy_Spectra_Uni.energy_integral(1); %(in W/m2)
+%variable 
+E_total=R_0*scale^2*mu_0/T*Energy_Spectra.energy_integral(1); %(in W/m2)
+disp([ 'Tidal heating spherically-symmetric model ' num2str(E_total_Uni) ' W/m^2'])
+disp([ 'Tidal heating laterally-heterogenous model ' num2str(E_total) ' W/m^2'])

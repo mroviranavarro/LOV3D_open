@@ -366,7 +366,7 @@ end
 if out_file~=0
     out_file_name=['Files_Out/' out_file '__' str_rheo '_per' num2str(Numerics.rheology_cutoff) '__forc__' num2str(Forcing.n) '_' num2str(Forcing.m) '_per' num2str(Numerics.perturbation_order) '.txt'];
     FID=fopen(out_file_name,'w');
-    out_file_name_reference_y=['Files_out/y__' str_rheo '_per' num2str(Numerics.rheology_cutoff) '__forc__' num2str(Forcing.n) '_' num2str(Forcing.m) '_per' num2str(Numerics.perturbation_order) '.mat'];
+    out_file_name_reference_y=['Files_Out/y__' str_rheo '_per' num2str(Numerics.rheology_cutoff) '__forc__' num2str(Forcing.n) '_' num2str(Forcing.m) '_per' num2str(Numerics.perturbation_order) '.mat'];
 end
 %% (2) OBTAIN COUPLINGS --------------------------------------------------------------
 if verbose==1

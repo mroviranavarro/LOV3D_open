@@ -1,5 +1,5 @@
 # LOV3D
-LOV3D is Matlab package for obtaining the tidal response of  viscoelastic self-gravitating bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation and Poisson equations and computes the tidal Love numbers. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2023.
+**LOV3D** is a Matlab package for obtaining the tidal response of  viscoelastic self-gravitating bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation and Poisson equations and computes the tidal Love numbers. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2023.
 
 ![plot](./Plots_Out/Figure7b.png)
 
@@ -25,8 +25,11 @@ The theory behind the method is detailed in Rovira-Navarro et al. 2023. A manual
 
 ## Author (s)
 This software have been developed by
-- ** Marc Rovira-Navarro** :  ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0000-0002-9980-5065] Method conceptualization and development 
-- ** Allard Veenstra** Development 
+- **Marc Rovira-Navarro** :  ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0000-0002-9980-5065] Conceptualization, methodology and software
+- **Isamu Matsuyama**: ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0000-0002-2917-8633] Conceptualization 
+- **Allard Veenstra** software 
+
+
 
 ## License
 The contents in the `docs/` directory are licensed under a **CC-BY 4.0** (see [CC-BY-4.0](LICENSES/CC-BY-4.0.txt) file).
