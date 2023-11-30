@@ -63,6 +63,7 @@
         % Love_Spectra.mf: order of the forcing 
         % Love_Spectra.n: degree of the solution
         % Love_Spectra.m: order of the solution
+        % Love_Spectra.order: order of the coupling
         % Love_Spectra.k: gravity Love numbers
         % Love_Spectra.h: radial displacement Love numbers
     % y_rad: radial functions

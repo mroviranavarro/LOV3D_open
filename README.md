@@ -20,7 +20,7 @@ The code uses the following third-party libraries:
 - [M_Map](www.eoas.ubc.ca/~rich/map.html): Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.  
 - [export_fig](https://github.com/altmany/export_fig/releases/tag/v3.40): Yair Altman (2023). export_fig (https://github.com/altmany/export_fig/releases/tag/v3.40), GitHub. Retrieved November 21, 2023.  
 - [harmonicY](https://www.mathworks.com/matlabcentral/fileexchange/74069-wigner-3j-6j-9j): Javier Montalt Tordera (2023). Spherical Harmonics, GitHub. Retrieved November 21, 2023. 
-- [Wigner 3j-6j-9j]((https://www.mathworks.com/matlabcentral/fileexchange/74069-wigner-3j-6j-9j)): Vladimir Sovkov (2023). Wigner 3j-6j-9j, MATLAB Central File Exchange. Retrieved October 4, 2023.  
+- [Wigner 3j-6j-9j](https://www.mathworks.com/matlabcentral/fileexchange/74069-wigner-3j-6j-9j): Vladimir Sovkov (2023). Wigner 3j-6j-9j, MATLAB Central File Exchange. Retrieved October 4, 2023.  
 
 
 ## Usage
@@ -117,8 +117,7 @@ Licenses and copyright statements for [cmocean](https://github.com/chadagreene/c
 
 ## References
 
-- (Rovira-Navarro, M., Matsuyama, I., Berne, A. 2023)[doi:10.48550/arXiv.2311.15710]. A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. arXiv e-prints.
-- Rovira-Navarro, M., Matsuyama, I. & Berne, A., (in preparation). A Spectral Method to Compute the Tides of Laterally-Heterogenous bodies.   
+- (Rovira-Navarro, M., Matsuyama, I., Berne, A. 2023)[https://arxiv.org/abs/2311.15710]. A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. arXiv e-prints. doi:10.48550/arXiv.2311.15710
 - Rovira-Navarro, M.,Matsuyama, I. & Berne, A., 2023 Revealing lateral structures in the interiors of planets and moons from tidal observations. AGU Fall Meeting Abstracts (2023).  
 - (Rovira-Navarro, M. & Matsuyama, I. 2022)[https://ui.adsabs.harvard.edu/abs/2022AGUFM.P45E2514R/abstract]., A Spectral Method to Study the Tides of Laterally Heterogenous Bodies.  AGU Fall Meeting Abstracts.  
 
@@ -127,7 +126,7 @@ Licenses and copyright statements for [cmocean](https://github.com/chadagreene/c
 
 If you use this software please cite it as:
 
-- Rovira-Navarro, M., Matsuyama, I. & Berne, A., (in preparation). A Spectral Method to Compute the Tides of Laterally-Heterogenous bodies.
+- (Rovira-Navarro, M., Matsuyama, I., Berne, A. 2023)[https://arxiv.org/abs/2311.15710]. A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. arXiv e-prints. doi:10.48550/arXiv.2311.15710
 
 
 ## Would you like to contribute?
