@@ -63,7 +63,7 @@ Interior_Model.mu0=1;
 % LATERAL VARIATIONS
 % Lateral variations are given in terms of real spherical harmonics.
 % In this case, we provide the amplitude of each harmonics in % of peak-to-peak variations with respect the mean properities
-nR=1; %degree of lateral variations
+nR=2; %degree of lateral variations
 mR=0; %order of lateral variations 
 variable_mu_p=0; % shear modulus variations
 variable_eta_p=50; % viscosity variations 
