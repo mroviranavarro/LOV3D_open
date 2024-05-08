@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-**LOV3D** is a Matlab package for obtaining the tidal response of viscoelastic self-gravitating bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation and Poisson equations and computes the tidal Love numbers. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2023.
+**LOV3D** is a Matlab package for obtaining the tidal response of viscoelastic self-gravitating bodies with lateral variations of interior properties. For a given interior structure and tidal load, the software solves the mass conservation, momentum conservation and Poisson equations and computes the tidal Love numbers. This is done in the spectral domain as detailed in Rovira-Navarro et al. 2024.
 
 ![plot](./Plots_Out/Figure7b.png)
 
@@ -117,7 +117,7 @@ Licenses and copyright statements for [cmocean](https://github.com/chadagreene/c
 
 ## References
 
-- [Rovira-Navarro, M., Matsuyama, I., Berne, A. 2023](https://arxiv.org/abs/2311.15710). A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. arXiv e-prints. doi:10.48550/arXiv.2311.15710
+- [Rovira-Navarro, M., Matsuyama, I., Berne, A. 2024](https://doi.org/10.3847/PSJ/ad381f). A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. The Planetary Science Journal, 5. doi:10.3847/PSJ/ad381f
 - Rovira-Navarro, M.,Matsuyama, I. & Berne, A., 2023 Revealing lateral structures in the interiors of planets and moons from tidal observations. AGU Fall Meeting Abstracts (2023).  
 - [Rovira-Navarro, M. & Matsuyama, I. 2022](https://ui.adsabs.harvard.edu/abs/2022AGUFM.P45E2514R/abstract)., A Spectral Method to Study the Tides of Laterally Heterogenous Bodies.  AGU Fall Meeting Abstracts.  
 
@@ -126,7 +126,7 @@ Licenses and copyright statements for [cmocean](https://github.com/chadagreene/c
 
 If you use this software please cite it as:
 
-- [Rovira-Navarro, M., Matsuyama, I., Berne, A. 2023](https://arxiv.org/abs/2311.15710). A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. arXiv e-prints. doi:10.48550/arXiv.2311.15710
+- [Rovira-Navarro, M., Matsuyama, I., Berne, A. 2024](https://doi.org/10.3847/PSJ/ad381f). A Spectral Method to Compute the Tides of Laterally-Heterogeneous Bodies. The Planetary Science Journal. doi:10.3847/PSJ/ad381f
 
 
 ## Would you like to contribute?

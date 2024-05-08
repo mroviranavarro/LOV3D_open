@@ -17,17 +17,18 @@ G=6.67e-11;
 omega0=4.1086E-05; %orbital frequency  
 T=2*pi/omega0;
 Forcing(1).Td=T;
-Forcing(1).n=2; 
+Forcing(1).n=3; 
 Forcing(1).m=0; 
-Forcing(1).F=3/4*sqrt(1/5); 
-Forcing(2).Td=2*pi/omega0;
-Forcing(2).n=2; 
-Forcing(2).m=-2; 
-Forcing(2).F=-7/8*sqrt(6/5);
-Forcing(3).Td=2*pi/omega0;
-Forcing(3).n=2; 
-Forcing(3).m=2; 
-Forcing(3).F=1/8*sqrt(6/5);
+Forcing(1).F=1; 
+% Forcing(1).F=3/4*sqrt(1/5); 
+% Forcing(2).Td=2*pi/omega0;
+% Forcing(2).n=2; 
+% Forcing(2).m=-2; 
+% Forcing(2).F=-7/8*sqrt(6/5);
+% Forcing(3).Td=2*pi/omega0;
+% Forcing(3).n=2; 
+% Forcing(3).m=2; 
+% Forcing(3).F=1/8*sqrt(6/5);
 %% INTERIOR MODEL 
 % The interior model is defined in the structure Interior_Model. 
 % The interior model can either be specified using dimensional or non-dimensional parameters. 
@@ -35,6 +36,7 @@ Forcing(3).F=1/8*sqrt(6/5);
 % In this example we use the non-dimensional parameters of a one-layer Io (see Section 2.2 and Table 1)
 mu_eff=5.2; %effective shear modulus 
 r_ratio=0.53; %ratio between surface and core radius R/R_2
+r_ratio=0.05;
 rho_r=1.59; %ratio between core and mantle density 
 %Interior_Model.Delta_rho can be use to specify the density contrast between the uppermost
 %layer and the layer immediately below. For icy moons Delta_rho=0 can be specified(ocean
@@ -44,8 +46,8 @@ Ks_nd=200/60; %ratio between bulk and shear modulus
 Interior_Model.MaxTime=3.42; %non-dimensional Maxwell-time 
 Interior_Model.eta=Interior_Model.MaxTime/(2*pi); %non-dimensional viscosity, here from the Maxwell time
 % uncomment if the model is elastic
-% Interior_Model.eta=NaN;
-% Interior_Model.MaxTime=NaN;
+Interior_Model.eta=NaN;
+Interior_Model.MaxTime=NaN;
 % here the interior model is build 
 %nondimensional model 
 Interior_Model.eta0=Interior_Model.eta; 
@@ -66,7 +68,7 @@ Interior_Model.mu0=1;
 nR=2; %degree of lateral variations
 mR=0; %order of lateral variations 
 variable_mu_p=0; % shear modulus variations
-variable_eta_p=50; % viscosity variations 
+variable_eta_p=0; % viscosity variations 
 variable_K_p=0; % bulk modulus variations 
 %% NUMERICS
 Numerics.Nr=500; %number of radial points 
@@ -176,6 +178,9 @@ else
         end
     end
 end
+l=3; 
+mu_l=(2*l^2+4*l+3)/l*mu_eff;
+k2u=1/(1+mu_l)*3/2/(l-1);
 %% GET ENERGY SPECTRA
 % obtains the energy dissipation spectra
 % can be commentted if elastic
